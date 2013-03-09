@@ -1,0 +1,15 @@
+objects = main.obj x86cpuid.obj
+output = updump.exe
+CC = cl
+CFLAGS = /nologo /W3 /O2 /DUP_I386
+LD = link
+LDFLAGS = /nologo advapi32.lib
+
+$(output) : $(objects)
+	$(LD) $(LDFLAGS) /out:$(output) $(objects)
+
+.c.obj:
+	$(CC) $(CFLAGS) /c $*.c
+
+clean :
+	del /f /q $(objects) $(output)
