@@ -1,7 +1,7 @@
 objects = main.obj x86cpuid.obj
 output = updump.exe
 CC = cl
-CFLAGS = /nologo /W3 /O2 /DUP_I386
+CFLAGS = /nologo /W3 /O2 /D_CRT_SECURE_NO_WARNINGS /DUP_I386
 LD = link
 LDFLAGS = /nologo advapi32.lib
 
