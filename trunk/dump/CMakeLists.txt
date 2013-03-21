@@ -21,14 +21,14 @@ int main() {return 0;}
 	" ${define})
 	if (${define})
 		add_definitions (-D${define})
-		list (APPEND SOURCES ${source})
+		list (APPEND SOURCES ${source} ${ARGN})
 	endif ()
 endmacro ()
 
 check_architecture (UP_I386 "defined(__i386) || defined(_M_IX86)"
-	x86cpuid.c)
+	x86cpuid.c x86msr.c)
 check_architecture (UP_X86_64 "defined(__x86_64) || defined(_M_AMD64)"
-	x86cpuid.c)
+	x86cpuid.c x86msr.c)
 
 set (CMAKE_BUILD_TYPE Release)
 add_executable (updump ${SOURCES})
