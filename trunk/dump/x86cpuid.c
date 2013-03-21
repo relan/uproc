@@ -22,7 +22,8 @@ enum {eax, ebx, ecx, edx};
 
 static void do_cpuid(unsigned leaf, unsigned subleaf, unsigned rv[])
 {
-#ifdef _WIN32
+#ifdef _MSC_VER
+#ifdef UP_I386
 	unsigned out_eax, out_ebx, out_ecx, out_edx;
 
 	__asm {
@@ -39,6 +40,19 @@ static void do_cpuid(unsigned leaf, unsigned subleaf, unsigned rv[])
 	rv[ebx] = out_ebx;
 	rv[ecx] = out_ecx;
 	rv[edx] = out_edx;
+#else
+	int irv[4];
+
+	/*
+	 * MSC compiler does not support inline assembly in 64-bit code.
+	 * It supports __cpuidex intrinsic since 15.0 (VS 2008) SP1.
+	 */
+	__cpuidex(irv, leaf, subleaf);
+	rv[eax] = irv[0];
+	rv[ebx] = irv[1];
+	rv[ecx] = irv[2];
+	rv[edx] = irv[3];
+#endif
 #else
 	__asm(
 #ifdef UP_I386
