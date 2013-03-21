@@ -17,6 +17,7 @@
 
 #if defined(UP_I386) || defined(UP_X86_64)
 #include "x86cpuid.h"
+#include "x86msr.h"
 #else
 #error unsupported architecture
 #endif
@@ -251,6 +252,7 @@ int main(void)
 
 #if defined(UP_I386) || defined(UP_X86_64)
 	dump_x86_cpuid();
+	dump_x86_msr();
 #else
 #error unsupported architecture
 #endif
