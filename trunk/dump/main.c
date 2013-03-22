@@ -139,7 +139,7 @@ static void get_os(char *buffer, size_t size)
 		  KEY_READ, &hCurrentVersion) == ERROR_SUCCESS
 	    && hCurrentVersion) {
 		DWORD dwKeyType = REG_NONE;
-		DWORD dwBufferLength = size;
+		DWORD dwBufferLength = (DWORD) size;
 
 		if (RegQueryValueExA(hCurrentVersion, "ProductName", NULL,
 			&dwKeyType, buffer, &dwBufferLength) == ERROR_SUCCESS
