@@ -21,6 +21,8 @@
 #include <string.h>
 #include <time.h>
 
+#define snprintf _snprintf
+
 #if WINVER < 0x501
 typedef struct {
 	DWORD     dwLength;
