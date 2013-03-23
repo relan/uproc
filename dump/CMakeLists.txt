@@ -1,7 +1,19 @@
 cmake_minimum_required (VERSION 2.6)
 include (CheckCSourceCompiles)
 
-set (SOURCES main.c)
+set (SOURCES main.c platform.c)
+
+if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
+	list (APPEND SOURCES osx.c)
+elseif ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+	list (APPEND SOURCES linux.c)
+elseif ("${CMAKE_SYSTEM_NAME}" STREQUAL "SunOS")
+	list (APPEND SOURCES solaris.c)
+elseif ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
+	list (APPEND SOURCES windows.c)
+else ()
+	message (SEND_ERROR "Unknown platform ${CMAKE_SYSTEM_NAME}")
+endif ()
 
 if ("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
 	set (CMAKE_C_FLAGS "-Wall -g")
