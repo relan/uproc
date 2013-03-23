@@ -46,6 +46,9 @@ typedef struct {
 #endif
 typedef BOOL (WINAPI *LPGMSE)(MEMORYSTATUSEX *lpBuffer);
 #define snprintf _snprintf
+#elif defined(__sun)
+#include <sys/utsname.h>
+#include <unistd.h>
 #endif
 
 #include <stdio.h>
@@ -82,7 +85,7 @@ static void get_computer_model(char *buffer, size_t size)
 #if defined(__APPLE__)
 	if (sysctlbyname("hw.model", buffer, &size, NULL, 0) != 0)
 		strcpy(buffer, "UnknownMac");	/* sysctl failed */
-#elif defined(__gnu_linux__) || defined(_WIN32)
+#elif defined(__gnu_linux__) || defined(_WIN32) || defined(__sun)
 	strncpy(buffer, "PC", size);
 #else
 #error unsupported platform
@@ -94,7 +97,7 @@ static void get_os(char *buffer, size_t size)
 #if defined(__APPLE__)
 	struct utsname name;
 
-	if (uname(&name) == 0) {
+	if (uname(&name) != -1) {
 		int major = 0, minor = 0;
 
 		sscanf(name.release, "%d.%d.", &major, &minor);
@@ -156,7 +159,13 @@ static void get_os(char *buffer, size_t size)
 		RegCloseKey(hCurrentVersion);
 	}
 	strcpy(buffer, "unknown Windows");
+#elif defined(__sun)
+	struct utsname name;
 
+	if (uname(&name) != -1)
+		snprintf(buffer, size, "Solaris %s", name.version);
+	else
+		strncpy(buffer, "unknown Solaris", size);
 #else
 #error unsupported platform
 #endif
@@ -167,7 +176,7 @@ static void get_kernel(char *buffer, size_t size)
 #if defined(__APPLE__) || defined(__gnu_linux__)
 	struct utsname name;
 
-	if (uname(&name) == 0)
+	if (uname(&name) != -1)
 		snprintf(buffer, size, "%s %s", name.sysname, name.release);
 	else
 #ifdef __APPLE__
@@ -183,6 +192,9 @@ static void get_kernel(char *buffer, size_t size)
 			 ver.dwBuildNumber);
 	else
 		strncpy(buffer, "unknown NT", size);
+#elif defined(__sun)
+	/* FIXME */
+	strncpy(buffer, "unknown UTS", size);
 #else
 #error unsupported platform
 #endif
@@ -221,6 +233,14 @@ static void get_ram(char *buffer, size_t size)
 		return;
 	/* convert bytes to kilobytes with rounding */
 	ram = (meminfo.ullTotalPhys + 512) / 1024;
+#elif defined(__sun)
+	unsigned long long ram;
+	long pages = sysconf(_SC_PHYS_PAGES);
+	long page_size = sysconf(_SC_PAGESIZE);
+
+	if (pages == -1 || page_size == -1)
+		return;
+	ram = (unsigned long long) pages * page_size / 1024;
 #else
 #error unsupported platform
 #endif
