@@ -61,16 +61,14 @@ static void do_cpuid(unsigned leaf, unsigned subleaf, unsigned rv[])
 		"xchgq %%rbx, %%rsi\n"
 #endif
 		"cpuid\n"
-		"movl %%ebx, %1\n"
 #ifdef UP_I386
 		"xchgl %%ebx, %%esi\n"
 #else
 		"xchgq %%rbx, %%rsi\n"
 #endif
-		: "=a" (rv[eax]), "=r" (rv[ebx]),
+		: "=a" (rv[eax]), "=S" (rv[ebx]),
 		  "=c" (rv[ecx]), "=d" (rv[edx])
-		: "0" (leaf), "2" (subleaf)
-		: "si");
+		: "0" (leaf), "2" (subleaf));
 #endif
 }
 
