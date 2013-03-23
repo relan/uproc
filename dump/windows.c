@@ -50,10 +50,11 @@ void get_date(char *buffer, size_t size)
 	else
 		tz = -(tzinfo.Bias / 60 * 100 + tzinfo.Bias % 60);
 
-	snprintf(buffer, size, "%d-%02d-%02d %02d:%02d:%02d UTC%+05ld",
+	_snprintf(buffer, size, "%d-%02d-%02d %02d:%02d:%02d UTC%+05ld",
 		tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday,
 		tm->tm_hour, tm->tm_min, tm->tm_sec,
 		tz);
+	buffer[size - 1] = '\0';
 }
 
 void get_ram(char *buffer, size_t size)
@@ -68,8 +69,9 @@ void get_ram(char *buffer, size_t size)
 			!lpGlobalMemoryStatusEx(&meminfo))
 		return;
 
-	snprintf(buffer, size, "(%llu MB)",
+	_snprintf(buffer, size, "(%llu MB)",
 		(meminfo.ullTotalPhys / 1024 + 512) / 1024);
+	buffer[size - 1] = '\0';
 }
 
 void get_os(char *buffer, size_t size)
@@ -97,7 +99,8 @@ void get_os(char *buffer, size_t size)
 		}
 		RegCloseKey(hCurrentVersion);
 	}
-	strcpy(buffer, "unknown Windows");
+	strncpy(buffer, "unknown Windows", size);
+	buffer[size - 1] = '\0';
 }
 
 void get_kernel(char *buffer, size_t size)
@@ -105,9 +108,10 @@ void get_kernel(char *buffer, size_t size)
 	OSVERSIONINFO ver = {sizeof(OSVERSIONINFO)};
 
 	if (GetVersionEx(&ver))
-		snprintf(buffer, size, "NT %lu.%lu.%lu",
+		_snprintf(buffer, size, "NT %lu.%lu.%lu",
 			 ver.dwMajorVersion, ver.dwMinorVersion,
 			 ver.dwBuildNumber);
 	else
 		strncpy(buffer, "unknown NT", size);
+	buffer[size - 1] = '\0';
 }
