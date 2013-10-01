@@ -38,7 +38,7 @@ int main(void)
 	get_os(os, sizeof(os));
 	get_kernel(kernel, sizeof(kernel));
 
-	puts("================== begin of profile dump ===================");
+	puts("==================== profile dump start ====================");
 	printf("date:     %s\n", date);
 	printf("computer: %s %s\n", computer, ram);
 	printf("OS:       %s\n", os);
@@ -51,7 +51,7 @@ int main(void)
 #error unsupported architecture
 #endif
 
-	puts("=================== end of profile dump ====================");
+	puts("===================== profile dump end =====================");
 
 	return 0;
 }
