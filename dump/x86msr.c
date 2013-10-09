@@ -16,7 +16,7 @@
  */
 
 #include "x86msr.h"
-#if defined(__gnu_linux__)
+#if defined(__gnu_linux__) || defined(__APPLE__)
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -38,7 +38,12 @@ void dump_x86_msr(void)
 {
 #if defined(__gnu_linux__)
 	int fd = open("/dev/cpu/0/msr", O_RDONLY);
+#endif
+#if defined(__APPLE__)
+	int fd = open("/dev/msr", O_RDONLY);
+#endif
 
+#if defined(__gnu_linux__) || defined(__APPLE__)
 	puts("");
 	puts("MSR dump:");
 
