@@ -2,6 +2,7 @@ cmake_minimum_required (VERSION 2.6)
 include (CheckCSourceCompiles)
 
 set (SOURCES main.c platform.c)
+set (CMAKE_BUILD_TYPE Release)
 
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
 	list (APPEND SOURCES osx.c)
@@ -44,5 +45,4 @@ check_architecture (UP_I386 "defined(__i386) || defined(_M_IX86)"
 check_architecture (UP_X86_64 "defined(__x86_64) || defined(_M_AMD64)"
 	x86cpuid.c x86msr.c)
 
-set (CMAKE_BUILD_TYPE Release)
 add_executable (updump ${SOURCES})
