@@ -22,7 +22,7 @@
 (define (test-feature dependency feature)
   (cond
     ((equal? dependency nil) nil)
-    ((equal? dependency 0) 0)
+    ((equal? dependency #f) #f)
     ((equal? feature nil) nil)
     (else (not (= feature 0)))))
 
