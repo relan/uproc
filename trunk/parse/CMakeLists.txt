@@ -29,4 +29,4 @@ foreach (CSOURCE ${SOURCES})
 endforeach (CSOURCE ${SOURCES})
 
 add_executable (upparse ${SOURCES})
-target_link_libraries (upparse chicken)
+target_link_libraries (upparse ${CHICKEN_LIBRARY})
