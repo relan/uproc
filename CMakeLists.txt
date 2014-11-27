@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.6)
-project (uproc)
+project (uproc C)
 
 add_subdirectory (dump)
 add_subdirectory (convert)
