@@ -94,6 +94,8 @@
   (cpuid #t #x7 ebx 8))
 (print-feature "Supervisor-Mode Execution Prevention"
   (cpuid #t #x7 ebx 7))
+(print-feature "Supervisor-Mode Access Prevention"
+  (cpuid #t #x7 ebx 20))
 (print-feature "Hardware Lock Elision"
   (cpuid #t #x7 ebx 4))
 (print-feature "Restricted Transactional Memory"
