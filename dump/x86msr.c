@@ -49,6 +49,7 @@ void dump_x86_msr(void)
 
 	dump_msr(fd, "IA32_FEATURE_CONTROL", 0x3a);
 	dump_msr(fd, "IA32_MISC_ENABLE", 0x1a0);
+	dump_msr(fd, "IA32_APIC_BASE", 0x1b);
 	dump_msr(fd, "IA32_EFER", 0xc0000080);
 	dump_msr(fd, "IA32_VMX_BASIC", 0x480);
 	dump_msr(fd, "IA32_VMX_PINBASED_CTLS", 0x481);

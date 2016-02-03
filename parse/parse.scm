@@ -71,7 +71,9 @@
 (print-feature "MONITOR/MWAIT"
   (cpuid #t #x1 ecx 3))
 (print-feature "x2APIC"
-  (cpuid #t #x1 ecx 21))
+  (define x2apic (cpuid #t #x1 ecx 21)))
+(print-feature "x2APIC is active"
+  (msr x2apic "IA32_APIC_BASE" 10))
 (print-feature "XSAVE instruction"
   (define xsave (cpuid #t #x1 ecx 26)))
 (print-feature "XSAVE is active"
