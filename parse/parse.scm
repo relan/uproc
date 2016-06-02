@@ -150,6 +150,8 @@
   (msr vmx "IA32_VMX_PINBASED_CTLS" 39))
 (print-feature "Extended Page Tables"
   (msr secondary_ctls "IA32_VMX_PROCBASED_CTLS2" 33))
+(print-feature "Descriptor-table exiting"
+  (msr secondary_ctls "IA32_VMX_PROCBASED_CTLS2" 34))
 (print-feature "Virtual Processor Identifiers"
   (msr secondary_ctls "IA32_VMX_PROCBASED_CTLS2" 37))
 (print-feature "Unrestricted Guest"
