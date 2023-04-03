@@ -1,0 +1,68 @@
+
+Generic features:
+
+ - Physical Address Extension: ?
+ - Physical Attributes Table: ?
+ - MONITOR/MWAIT: ?
+ - x2APIC: ?
+ - x2APIC is active: ?
+ - XSAVE instruction: ?
+ - XSAVE is active: ?
+ - Long Mode: ?
+ - Long Mode is active: ?
+ - No-Execute Page Protection: ?
+ - No-Execute Page Protection is active: ?
+ - Process-Context Identifiers: ?
+ - RDRAND instruction: ?
+ - Bit Manipulation Instructions: ?
+ - Bit Manipulation Instructions 2: ?
+ - Supervisor-Mode Execution Prevention: ?
+ - Supervisor-Mode Access Prevention: ?
+ - Hardware Lock Elision: ?
+ - Restricted Transactional Memory: ?
+ - Feature Control Locked: ?
+
+SIMD features:
+
+ - MultiMedia eXtensions: ?
+ - Steaming SIMD Extensions: ?
+ - Steaming SIMD Extensions 2: ?
+ - Steaming SIMD Extensions 3: ?
+ - Supplemental Steaming SIMD Extensions 3: ?
+ - Steaming SIMD Extensions 4.1: ?
+ - Steaming SIMD Extensions 4.2: ?
+ - AESNI instructions: ?
+ - Advanced Vector Extensions: ?
+ - Advanced Vector Extensions 2: ?
+ - Fused Multiply-Add: ?
+
+Intel VT-x features:
+
+ - Virtual Machine eXtension: ?
+ - VMX outside SMX: ?
+ - MSR Bitmaps: ?
+ - TPR Shadow: ?
+ - Secondary Controls: ?
+ - Virtual APIC: ?
+ - Preemption Timer: ?
+ - Posted Interrupts: ?
+ - Extended Page Tables: ?
+ - Descriptor-table exiting: ?
+ - Virtual Processor Identifiers: ?
+ - Unrestricted Guest: ?
+ - PAUSE-Loop Exiting: ?
+ - VMCS Shadowing: ?
+ - EPT-Violation #VE: ?
+
+AMD SVM features:
+
+ - Secure Virtual Machine: ?
+ - Nested Paging: ?
+ - Next RIP Save: ?
+ - VMCB Clean Bits: ?
+ - Flush By ASID: ?
+ - Decode Assists: ?
+ - Pause Filter: ?
+ - Pause Filter Threshold: ?
+ - Advanced Virtual Interrupt Controller: ?
+
