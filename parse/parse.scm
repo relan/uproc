@@ -15,7 +15,7 @@
 ; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;
 
-(require-extension numbers)
+(require-extension srfi-151)
 
 (define nil '())
 
